@@ -28,20 +28,20 @@ export default function App() {
                );
              } 
              
-             else if (route.name === 'Expiry') {
+             else if (route.name === 'Scanner') {
               return (
                 <Ionicons
-                  name={'book-outline'}
+                  name={'scan-outline'}
                   size={size}
                   color={color}
                 />
               );
             } 
 
-            else if (route.name === 'Fridge') {
+            else if (route.name === 'Pantry') {
               return (
                 <Ionicons
-                  name={'book-outline'}
+                  name={'nutrition-outline'}
                   size={size}
                   color={color}
                 />
