@@ -4,9 +4,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Expiry from "./screens/expiry.js";
-import Foodfind from "./screens/foodfind.js";
-import Fridge from "./screens/fridge.js";
+import Scanner from "./screens/scanner.js";
+import Shopping from "./screens/shopping.js";
+import Pantry from "./screens/pantry.js";
 import Recipes from "./screens/recipes.js";
 import Donate from "./screens/donate.js";
 
@@ -74,20 +74,20 @@ export default function App() {
         { 
           <Tab.Screen
           name="Shopping"
-          component={Foodfind}
+          component={Shopping}
         /> 
         }
         
         {
         <Tab.Screen 
           name="Scanner" 
-          component={Expiry}
+          component={Scanner}
         />
         }
          
         {  <Tab.Screen 
           name="Pantry" 
-          component={Fridge} 
+          component={Pantry} 
           options={{ tabBarBadge: 4 }}
           />
         }
