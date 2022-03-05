@@ -21,23 +21,27 @@ export default function App() {
              if (route.name === 'Shopping') {
                return (
                  <Ionicons
-                   name={'book-outline'}
+                   name={'basket-outline'}
                    size={size}
                    color={color}
                  />
                );
-             } else if (route.name === 'Expiry') {
+             } 
+             
+             else if (route.name === 'Expiry') {
               return (
                 <Ionicons
-                  name= {"cog-outline"}
+                  name={'book-outline'}
                   size={size}
                   color={color}
                 />
               );
-            } else if (route.name === 'Fridge') {
+            } 
+
+            else if (route.name === 'Fridge') {
               return (
                 <Ionicons
-                  name={'bookmark-outline'}
+                  name={'book-outline'}
                   size={size}
                   color={color}
                 />
@@ -47,7 +51,7 @@ export default function App() {
             else if (route.name === 'Recipes') {
               return (
                 <Ionicons
-                  name={'person-outline'}
+                  name={'book-outline'}
                   size={size}
                   color={color}
                 />
@@ -56,7 +60,7 @@ export default function App() {
             else if (route.name === 'Donate') {
               return (
                 <Ionicons
-                  name={'chatbox-outline'}
+                  name={'leaf-outline'}
                   size={size}
                   color={color}
                />
@@ -64,7 +68,7 @@ export default function App() {
             } 
            },
           tabBarInactiveTintColor: 'gray',
-          tabBarActiveTintColor: 'pink', 
+          tabBarActiveTintColor: 'blue', 
         })}
         >
         { 
