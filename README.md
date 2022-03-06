@@ -50,3 +50,8 @@ Whilst we kept the UI relatively simple for now, given the our focus on combing 
 
 These are features that would be useful to everyone, and we hope you will consider using Shopi!
 
+## Devpost
+
+https://devpost.com/software/shopi
+Winners of Bloomberg - Best Code for Good Hack
+
