@@ -1,4 +1,4 @@
-# hackherthon
+# Hack-her-thon 2022
 
 ## Inspiration
 
