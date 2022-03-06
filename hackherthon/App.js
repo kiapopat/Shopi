@@ -9,6 +9,7 @@ import Shopping from "./screens/shopping.js";
 import Pantry from "./screens/pantry.js";
 import Recipes from "./screens/recipes.js";
 import Donate from "./screens/donate.js";
+import Navigation from "./screens/navigation.js";
 
 const Tab = createBottomTabNavigator();
 
@@ -18,6 +19,7 @@ export default function App() {
       <Tab.Navigator
         screenOptions ={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
+             
              if (route.name === 'Shopping') {
                return (
                  <Ionicons
@@ -26,7 +28,17 @@ export default function App() {
                    color={color}
                  />
                );
-             } 
+             }
+
+             else if (route.name === 'Navigation') {
+              return (
+                <Ionicons
+                  name={'locate-outline'}
+                  size={size}
+                  color={color}
+               />
+              );
+            } 
              
              else if (route.name === 'Scanner') {
               return (
@@ -65,7 +77,7 @@ export default function App() {
                   color={color}
                />
               );
-            } 
+            }
            },
           tabBarInactiveTintColor: 'gray',
           tabBarActiveTintColor: 'blue', 
@@ -75,6 +87,13 @@ export default function App() {
           <Tab.Screen
           name="Shopping"
           component={Shopping}
+        /> 
+        }
+
+        { 
+          <Tab.Screen
+          name="Navigation"
+          component={Navigation}
         /> 
         }
         
@@ -88,7 +107,7 @@ export default function App() {
         {  <Tab.Screen 
           name="Pantry" 
           component={Pantry} 
-          options={{ tabBarBadge: 4 }}
+          //options={{ tabBarBadge: 4 }}
           />
         }
         

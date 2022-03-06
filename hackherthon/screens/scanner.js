@@ -14,7 +14,7 @@ async function callGoogleVisionAsync(image) {
         },
         features: [
           {
-            type: 'LABEL_DETECTION',
+            type: 'LOGO_DETECTION',
             maxResults: 1,
           },
         ],
@@ -33,7 +33,7 @@ async function callGoogleVisionAsync(image) {
   const result = await response.json();
   console.log('callGoogleVisionAsync -> result', result);
 
-  return result.responses[0].labelAnnotations[0].description;
+  return result.responses[0].logoAnnotations[0].description;
 }
 
 export default function App() {

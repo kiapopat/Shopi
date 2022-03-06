@@ -1,126 +1,51 @@
-// import { StatusBar } from 'expo-status-bar';
-// import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Button, View, SafeAreaView, Text, Alert } from 'react-native';
+import { BarCodeScanner } from 'expo-barcode-scanner';
 
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Open up App.js to start working on your app!</Text>
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-// }
+export default function App () {
+  const [hasPermission, setHasPermission] = useState(null);
+  const [scanned, setScanned] = useState(false);
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
+  
+    useEffect(() => {
+      (async () => {
+        const { status } = await BarCodeScanner.requestPermissionsAsync();
+        setHasPermission(status === 'granted');
+      })();
+    }, []);
+  
+    const handleBarCodeScanned = ({ type, data }) => {
+      setScanned(true);
+      alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    };
+  
+    if (hasPermission === null) {
+      return <Text>Requesting for camera permission</Text>;
+    }
+    if (hasPermission === false) {
+      return <Text>No access to camera</Text>;
+    }
+  
+    return (
+      <View style={styles.container}>
+        <BarCodeScanner
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          style={StyleSheet.absoluteFillObject}
+        />
+        {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+      </View>
+    );
 
 
-import * as ImagePicker from 'expo-image-picker';
-import React from 'react';
-import { Button, Image, StyleSheet, Text, View } from 'react-native';
 
-const API_KEY = 'AIzaSyCq40H3mDgkPMknA_lecxky7ZkF667aIOk';
-const API_URL = `https://vision.googleapis.com/v1/images:annotate?key=${API_KEY}`;
 
-async function callGoogleVisionAsync(image) {
-  const body = {
-    requests: [
-      {
-        image: {
-          content: image,
-        },
-        features: [
-          {
-            type: 'LABEL_DETECTION',
-            maxResults: 1,
-          },
-        ],
-      },
-    ],
-  };
+}
 
-  const response = await fetch(API_URL, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'center',
     },
-    body: JSON.stringify(body),
   });
-  const result = await response.json();
-  console.log('callGoogleVisionAsync -> result', result);
-
-  return result.responses[0].labelAnnotations[0].description;
-}
-
-export default function App() {
-  const [image, setImage] = React.useState(null);
-  const [status, setStatus] = React.useState(null);
-  const [permissions, setPermissions] = React.useState(false);
-
-  const askPermissionsAsync = async () => {
-    let permissionResult = await ImagePicker.requestCameraPermissionsAsync();
-
-    if (permissionResult.granted === false) {
-      alert('Permission to access camera roll is required!');
-      return;
-    } else {
-      setPermissions(true);
-    }
-  };
-
-  const takePictureAsync = async () => {
-    const { cancelled, uri, base64 } = await ImagePicker.launchCameraAsync({
-      base64: true,
-    });
-
-    if (!cancelled) {
-      setImage(uri);
-      setStatus('Loading...');
-      try {
-        const result = await callGoogleVisionAsync(base64);
-        setStatus(result);
-      } catch (error) {
-        setStatus(`Error: ${error.message}`);
-      }
-    } else {
-      setImage(null);
-      setStatus(null);
-    }
-  };
-
-  return (
-    <View style={styles.container}>
-      {permissions === false ? (
-        <Button onPress={askPermissionsAsync} title="Ask permissions" />
-      ) : (
-        <>
-          {image && <Image style={styles.image} source={{ uri: image }} />}
-          {status && <Text style={styles.text}>{status}</Text>}
-          <Button onPress={takePictureAsync} title="Take a Picture" />
-        </>
-      )}
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  image: {
-    width: 300,
-    height: 300,
-  },
-  text: {
-    margin: 5,
-  },
-});
