@@ -7,7 +7,7 @@ import * as Location from 'expo-location';
 
 export default class App extends React.Component {
 
-  state = { 
+  state = {
     hasLocationPermission: false,
     latitude: 0,
     longitude: 0,
@@ -49,7 +49,7 @@ export default class App extends React.Component {
     const location = `location=${this.state.latitude},${this.state.longitude}`;
     const radius = '&radius=2000';
     const type = '&type=supermarket';
-    const key = '&key=AIzaSyCq40H3mDgkPMknA_lecxky7ZkF667aIOk';
+    const key = 'Insert your API key';
     const rankby = '&rankby=distance'
     const restaurantSearchUrl = url + location + type + rankby + key;
     console.log(restaurantSearchUrl);
@@ -63,7 +63,7 @@ export default class App extends React.Component {
     console.log(this.state.restaurantList.results)
     return (
       <View style={this.styles.container}>
-        <FlatList  
+        <FlatList
           data={this.state.restaurantList.results}
           keyExtractor={(item) => item.place_id}
           renderItem={({item}) => (
@@ -79,4 +79,3 @@ export default class App extends React.Component {
     );
   }
 }
-
