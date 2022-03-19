@@ -1,4 +1,4 @@
-# Hack-her-thon 2022
+# Shopi - Hack-her-thon 2022
 
 ## Inspiration
 
