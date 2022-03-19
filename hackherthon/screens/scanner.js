@@ -2,7 +2,7 @@ import * as ImagePicker from 'expo-image-picker';
 import React from 'react';
 import { Button, Image, StyleSheet, Text, View } from 'react-native';
 
-const API_KEY = 'AIzaSyCq40H3mDgkPMknA_lecxky7ZkF667aIOk';
+const API_KEY = 'Insert the API key';
 const API_URL = `https://vision.googleapis.com/v1/images:annotate?key=${API_KEY}`;
 
 async function callGoogleVisionAsync(image) {
